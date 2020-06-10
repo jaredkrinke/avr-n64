@@ -4,6 +4,10 @@ Read state from a Nintendo 64 controller using an ATmega32 microcontroller and l
 
 ![Demo](../data/demo.gif)
 
+Using this library, it's possible to convert a Nintendo 64 controller into a USB HID game pad, as in the following project:
+
+https://github.com/jaredkrinke/avr-n64-usb
+
 ## Library notes
 The communication library is implemented a single header file: `avr-n64.h`. To get the state of a controller, call this function:
 
@@ -45,7 +49,7 @@ The host initiates communication by sending 1 byte messages. The 0x01 message po
 * Analog joystick vertical position
 
 ## Implementation notes
-This implementation uses an ATmega32 (DIP package) running at >= 4 MHz (tested using the internal oscillator), with a power supply of 5 volts (tested with a repurposed cell phone charger). A 3.3 volt linear regulator supplies power to the controller.
+This implementation uses an ATmega32 (DIP package) running at >= 4 MHz (tested on 4 MHz internal oscillator and 12 MHz external crystal), with a power supply of 5 volts (tested with a repurposed cell phone charger). A 3.3 volt linear regulator supplies power to the controller.
 
 ### Timing
 This setup uses a software implementation of the protocol ("bit banging"). The code assumes specific optimized compiler output (e.g. loop unrolling and using "cbi" and "sbi" instructions for manipulating the data pin), and uses "nop" instructions to ensure a 1 MHz data clock.
